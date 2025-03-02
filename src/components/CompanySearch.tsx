@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, X } from 'lucide-react';
 import { companies } from '@/utils/financialData';
@@ -88,8 +89,13 @@ const CompanySearch = () => {
       {isOpen && (
         <div 
           ref={dropdownRef}
-          className="absolute mt-2 w-full bg-background border border-border rounded-xl shadow-lg z-50 overflow-hidden animate-scale-in max-h-[300px] overflow-y-auto"
-          style={{ zIndex: 1000 }}
+          className="fixed mt-2 w-full bg-background border border-border rounded-xl shadow-lg overflow-hidden animate-scale-in max-h-[300px] overflow-y-auto"
+          style={{ 
+            zIndex: 9999,
+            left: inputRef.current?.getBoundingClientRect().left,
+            top: inputRef.current?.getBoundingClientRect().bottom + window.scrollY + 8,
+            width: inputRef.current?.offsetWidth
+          }}
         >
           {filteredCompanies.length > 0 ? (
             <ul className="divide-y divide-border">
